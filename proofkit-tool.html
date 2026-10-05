@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProofKit — Etsy Design Theft Defense Kit</title>
+<meta name="description" content="Free check for Etsy sellers: protect yourself from the 'AliExpress Bot' wrongly flagging your listings after thieves steal your photos, and get a ready appeal plan if it already happened.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  :root {
+    --paper: #F6F4EC;
+    --paper-2: #EEE9DC;
+    --ink: #23272B;
+    --ink-soft: #5B6058;
+    --pine: #2B3A5C;
+    --pine-dark: #1E2A44;
+    --rust: #A6402C;
+    --ochre: #B8791F;
+    --thrive: #2F7A4D;
+    --line: #DCD5C3;
+    --white: #FFFFFF;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    line-height: 1.12;
+    margin: 0 0 0.5em;
+    color: var(--pine-dark);
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+  .hidden { display: none !important; }
+
+  /* Brand */
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 32px 0 0;
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--pine-dark);
+  }
+  .brand svg { width: 26px; height: 26px; color: var(--pine-dark); }
+
+  /* Hero */
+  #view-hero { padding-bottom: 20px; }
+  .hero-content { padding: 44px 0 8px; max-width: 620px; }
+  .hero-kicker { color: var(--rust); font-weight: 600; font-size: 15px; margin: 0 0 16px; }
+  .hero-content h1 { font-size: clamp(32px, 6vw, 50px); letter-spacing: -0.01em; }
+  .hero-sub { font-size: 18px; color: var(--ink-soft); max-width: 54ch; margin: 20px 0 32px; }
+  .hero-fine { margin-top: 14px; font-size: 14px; color: var(--ink-soft); }
+  .hero-stats { display: flex; gap: 36px; padding: 32px 0 48px; border-top: 1px solid var(--line); flex-wrap: wrap; }
+  .stat strong { display: block; font-family: 'Fraunces', serif; font-size: 28px; color: var(--pine-dark); }
+  .stat span { font-size: 14px; color: var(--ink-soft); }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    border: none;
+    border-radius: 4px;
+    padding: 15px 28px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+  .btn:focus-visible { outline: 2px solid var(--pine); outline-offset: 2px; }
+  .btn-primary { background: var(--pine); color: var(--white); }
+  .btn-primary:hover { background: var(--pine-dark); transform: translateY(-1px); }
+  .btn-secondary { background: var(--ink); color: var(--white); }
+  .btn-secondary:hover { transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .btn-ghost:hover { border-color: var(--ink); }
+  .btn[disabled] { opacity: 0.6; cursor: default; transform: none; }
+
+  /* Quiz */
+  #view-quiz { padding: 40px 0 80px; }
+  .quiz-card { background: var(--white); border: 1px solid var(--line); border-radius: 8px; padding: 40px 32px; }
+  .progress { height: 4px; background: var(--paper-2); border-radius: 2px; overflow: hidden; margin-bottom: 20px; }
+  .progress-fill { height: 100%; background: var(--pine); transition: width 0.3s ease; width: 0%; }
+  .quiz-step { font-size: 13px; color: var(--ink-soft); margin: 0 0 16px; font-weight: 600; }
+  #quiz-question { font-size: clamp(20px, 3vw, 26px); margin-bottom: 28px; max-width: 60ch; }
+  .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .option-btn {
+    text-align: left; padding: 16px 18px; border: 1.5px solid var(--line); border-radius: 6px;
+    background: var(--paper); font-family: 'IBM Plex Sans', sans-serif; font-size: 16px;
+    color: var(--ink); cursor: pointer; transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .option-btn:hover { border-color: var(--pine); background: var(--white); }
+  .option-btn:focus-visible { outline: 2px solid var(--pine); outline-offset: 2px; }
+
+  /* Results */
+  #view-results { padding: 44px 0 80px; }
+  .score-tag {
+    position: relative; background: var(--thrive); color: var(--white);
+    padding: 36px 36px 36px 54px; margin-bottom: 40px;
+    clip-path: polygon(0% 50%, 22px 0%, 100% 0%, 100% 100%, 22px 100%);
+  }
+  .score-tag::before {
+    content: ''; position: absolute; left: 9px; top: 50%; transform: translateY(-50%);
+    width: 8px; height: 8px; border-radius: 50%; background: var(--paper);
+  }
+  .score-tag.band-mid { background: var(--ochre); }
+  .score-tag.band-high { background: var(--rust); }
+  .score-label { margin: 0; font-size: 14px; opacity: 0.9; font-weight: 600; }
+  .score-number { font-family: 'Fraunces', serif; font-size: 68px; margin: 2px 0; line-height: 1; }
+  .score-band { margin: 0; font-size: 18px; font-weight: 600; }
+  .score-caption { margin: 10px 0 0; font-size: 12px; opacity: 0.75; line-height: 1.4; max-width: 46ch; }
+  .emergency-box {
+    background: #F9EFE9; border: 1.5px solid var(--rust); border-radius: 8px;
+    padding: 26px 28px; margin-bottom: 28px;
+  }
+  .emergency-box h3 { color: var(--rust); margin-top: 0; }
+  .emergency-box ol { margin: 0; padding-left: 20px; color: var(--ink); }
+  .emergency-box li { margin-bottom: 10px; font-size: 15px; line-height: 1.5; }
+  .emergency-box li:last-child { margin-bottom: 0; }
+
+  .report-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+  .report-row { border: 1px solid var(--line); border-left: 4px solid var(--line); border-radius: 6px; padding: 18px 20px; background: var(--white); }
+  .report-row.tier-high { border-left-color: var(--rust); }
+  .report-row.tier-medium { border-left-color: var(--ochre); }
+  .report-row.tier-low { border-left-color: var(--thrive); }
+  .report-row.tier-na { border-left-color: var(--line); }
+  .report-row-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+  .report-row-head h4 { margin: 0; font-size: 17px; }
+  .badge { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
+  .badge-high { background: #F5DFDA; color: var(--rust); }
+  .badge-medium { background: #F5E6CB; color: var(--ochre); }
+  .badge-low { background: #DCEADF; color: var(--thrive); }
+  .badge-na { background: var(--paper-2); color: var(--ink-soft); }
+  .report-row p { margin: 0; color: var(--ink-soft); font-size: 15px; max-width: 65ch; }
+  .locked-line { font-style: italic; }
+  .lock { margin-left: auto; opacity: 0.55; }
+
+  .unlock-card { background: var(--white); border: 1px solid var(--line); border-radius: 8px; padding: 32px; margin-bottom: 32px; }
+  .unlock-card h3 { margin-top: 0; }
+  .unlock-includes { padding-left: 20px; color: var(--ink-soft); margin-bottom: 24px; }
+  .unlock-includes li { margin-bottom: 6px; }
+  .license-row { margin-top: 24px; border-top: 1px solid var(--line); padding-top: 20px; }
+  .license-row label { display: block; font-size: 14px; color: var(--ink-soft); margin-bottom: 8px; }
+  .license-input-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  #license-input {
+    flex: 1; min-width: 200px; padding: 13px 14px; border: 1.5px solid var(--line);
+    border-radius: 6px; font-size: 15px; font-family: 'IBM Plex Sans', sans-serif;
+  }
+  #license-input:focus-visible { outline: 2px solid var(--pine); border-color: var(--pine); }
+  .license-msg { margin: 10px 0 0; font-size: 14px; color: var(--rust); min-height: 18px; }
+  .license-msg.ok { color: var(--thrive); }
+
+  .templates { margin-bottom: 32px; }
+  .template-block { background: var(--white); border: 1px solid var(--line); border-radius: 8px; padding: 24px; margin-bottom: 16px; }
+  .template-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 12px; }
+  .template-header h4 { margin: 0; }
+  .copy-btn { background: var(--paper-2); border: 1px solid var(--line); border-radius: 6px; padding: 6px 14px; font-size: 13px; cursor: pointer; font-family: 'IBM Plex Sans', sans-serif; white-space: nowrap; }
+  .copy-btn:hover { border-color: var(--pine); }
+  pre {
+    white-space: pre-wrap; font-family: 'IBM Plex Sans', sans-serif; font-size: 14.5px;
+    line-height: 1.7; color: var(--ink); background: var(--paper); border-radius: 6px;
+    padding: 18px; margin: 0;
+  }
+
+  footer { border-top: 1px solid var(--line); padding: 24px 0 48px; }
+  footer p { font-size: 13px; color: var(--ink-soft); max-width: 65ch; }
+
+  @media (max-width: 560px) {
+    .quiz-card { padding: 28px 20px; }
+    .score-tag { padding: 30px 22px 30px 38px; clip-path: polygon(0% 50%, 15px 0%, 100% 0%, 100% 100%, 15px 100%); }
+    .score-number { font-size: 54px; }
+    .license-input-row { flex-direction: column; }
+    .license-input-row button { width: 100%; }
+    .hero-stats { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="brand">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 3H10.5L21 13.5L13.5 21L3 10.5V3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      <circle cx="7" cy="7" r="1.3" fill="currentColor"/>
+    </svg>
+    <span>ProofKit</span>
+  </header>
+
+  <!-- HERO -->
+  <section id="view-hero" class="view">
+    <div class="hero-content">
+      <p class="hero-kicker">Sellers call it "the AliExpress Bot" — it can't tell you're the victim, not the thief.</p>
+      <h1>Someone stole your photos. Don't let Etsy's bot blame you for it.</h1>
+      <p class="hero-sub">Thieves scrape bestselling Etsy photos and resell knockoffs on AliExpress and Temu — then Etsy's automated system finds the match and flags the original seller instead. Check your protection level and get an action plan, free.</p>
+      <button id="start-btn" class="btn btn-primary">Start your free check</button>
+      <p class="hero-fine">Free. A few minutes. Nothing to install, no account needed.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>5.6M</strong><span>active Etsy shops today</span></div>
+      <div class="stat"><strong>6</strong><span>protection checks</span></div>
+      <div class="stat"><strong>1</strong><span>ready appeal plan</span></div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="view-quiz" class="view hidden">
+    <div class="quiz-card">
+      <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
+      <p class="quiz-step" id="quiz-step">Question 1</p>
+      <h2 id="quiz-question">Question text</h2>
+      <div class="quiz-options" id="quiz-options"></div>
+      <button id="back-btn" class="btn btn-ghost hidden">Back</button>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="view-results" class="view hidden">
+    <div class="emergency-box hidden" id="emergency-box">
+      <h3>Do these 3 things right now</h3>
+      <ol>
+        <li><strong>Screenshot the thief's listing immediately</strong> — on AliExpress, Temu, or wherever you found it, before they take it down or block you.</li>
+        <li><strong>File an IP complaint directly with that platform</strong> (not just Etsy) — AliExpress and Temu both have seller-rights or IP infringement report forms.</li>
+        <li><strong>Gather 5–10 original work-in-progress photos</strong> with visible timestamps — materials, tools, half-finished pieces — the single strongest proof you have.</li>
+      </ol>
+    </div>
+    <div class="score-tag" id="score-tag">
+      <p class="score-label">Your Protection Score</p>
+      <p class="score-number" id="score-number">--</p>
+      <p class="score-band" id="score-band">--</p>
+      <p class="score-caption">Educational indicator, not a guarantee an appeal will succeed.</p>
+    </div>
+
+    <div class="report-list" id="report-list"></div>
+
+    <div class="unlock-card" id="unlock-card">
+      <h3>Unlock your full defense kit</h3>
+      <ul class="unlock-includes">
+        <li>Every category explained in plain English — exactly what strengthens your case and how</li>
+        <li>A ready-to-customize Etsy appeal letter for wrongful "reseller" flags</li>
+        <li>An AliExpress/Temu IP infringement report template</li>
+      </ul>
+      <a id="payhip-link" href="#" target="_blank" rel="noopener" class="btn btn-primary">Get the full kit — <span id="price-display"></span></a>
+
+      <div class="license-row">
+        <label for="license-input">Already purchased? Enter your license key</label>
+        <div class="license-input-row">
+          <input id="license-input" type="text" placeholder="XXXXX-XXXXX-XXXXX-XXXXX" autocomplete="off">
+          <button id="unlock-btn" class="btn btn-secondary">Unlock</button>
+        </div>
+        <p class="license-msg" id="license-msg"></p>
+      </div>
+    </div>
+
+    <div class="templates hidden" id="templates-section">
+      <h3>Your bonus templates</h3>
+      <div class="template-block">
+        <div class="template-header">
+          <h4>Etsy appeal letter (wrongful flag)</h4>
+          <button class="copy-btn" data-target="tpl-policies">Copy</button>
+        </div>
+        <pre id="tpl-policies">Subject: Appeal — Listing Removed in Error (Photo Theft, Not Reselling)
+Case/Reference Number: [XXXX]
+
+Hello,
+
+My listing, "[Listing Title]," was removed for appearing to match
+products on AliExpress/Temu. This item is handmade by me, not
+resold. My original photos were stolen by a third party and are
+being used without permission to sell mass-produced knockoffs on
+[AliExpress/Temu — include the specific listing URL if you have it].
+
+I am the original creator, not the reseller. I've attached:
+- [X] original work-in-progress photos with visible timestamps
+- Screenshots of the infringing listing(s), with URLs
+- [Any additional proof: raw/unedited files, receipts for
+  materials, prior sales history of this design on my shop]
+
+I have been selling on Etsy for [X years] and this design has
+been part of my shop since [date]. I'm happy to provide any
+further documentation needed to confirm this.
+
+Please have a specialist review the attached evidence rather
+than the automated flag, and reinstate the listing.
+
+Thank you,
+[Your name]
+[Shop name]</pre>
+      </div>
+      <div class="template-block">
+        <div class="template-header">
+          <h4>AliExpress / Temu IP report</h4>
+          <button class="copy-btn" data-target="tpl-appeal">Copy</button>
+        </div>
+        <pre id="tpl-appeal">USE THIS TO REPORT THE THIEF DIRECTLY ON THE PLATFORM
+HOSTING THE STOLEN PHOTOS — a separate step from your Etsy
+appeal, and important evidence for it too.
+
+Infringement type: Image / copyright use without permission
+
+My original listing: [Your Etsy shop/listing URL, or product
+name and the date you first listed it if your listing was
+removed]
+
+Infringing listing: [URL of the AliExpress/Temu listing using
+your photos]
+
+Statement: These product photos were taken by me and first
+published on my own Etsy shop on [date]. I have not licensed
+or authorized their use by this seller. The listed item appears
+to be a mass-produced copy, not the handmade original shown
+in the photos.
+
+Evidence attached: [Original photo files with metadata/EXIF
+data showing creation date, plus screenshots of both listings
+side by side]
+
+Requested action: Remove the infringing listing and photos.
+
+Notes:
+- Keep a dated copy of this report and any reference number
+  you receive — it strengthens your Etsy appeal.
+- If the seller relists under a new listing, you may need to
+  repeat this process; keep a simple log of dates and links.</pre>
+      </div>
+    </div>
+
+    <button id="retake-btn" class="btn btn-ghost">Retake the check</button>
+  </section>
+
+  <footer>
+    <p>Built independently from patterns reported by Etsy sellers and public reporting on Etsy's automated enforcement systems. Not affiliated with or endorsed by Etsy, Inc., and not legal advice, nor a guarantee that any appeal, report, or takedown request will succeed — outcomes depend on Etsy's own review and the specifics of your case. If your business faces serious losses, consider consulting an IP attorney. Criteria last reviewed September 2026.</p>
+  </footer>
+
+</div>
+
+<script>
+/* ============================================================
+   SETUP — change these three lines once you've created your
+   product on Payhip with license keys turned on.
+   Product secret key: Payhip → your product → edit → scroll to
+   "Licenses" and enable "Generate a unique license key per sale".
+   ============================================================ */
+const PAYHIP_PRODUCT_URL = "https://payhip.com/b/U3O80";
+const PAYHIP_PRODUCT_SECRET_KEY = "prod_sk_U3O80_3d1d00f58f2220563ed685191168e53aad8d458d";
+const PRICE_DISPLAY = "$12";
+/* ============================================================ */
+
+const QUESTIONS = [
+  { id: 'situation', category: 'situation',
+    text: "Has a listing already been flagged or removed because your photos matched a site like AliExpress or Temu, or are you checking to protect yourself before it happens?",
+    options: [['emergency',"It's happening to me right now"],['prevention',"I'm checking to protect myself"]] },
+  { id: 'original_proof', category: 'proof',
+    text: "Do you have original, unedited photos or files from BEFORE the item was ever listed, with visible timestamps or metadata?",
+    options: [['yes','Yes'],['no',"No, or I'm not sure"]] },
+  { id: 'watermarking', category: 'watermark',
+    text: "Do you watermark or otherwise mark process and behind-the-scenes photos you share publicly (social media, your website)?",
+    options: [['yes','Yes'],['no','No']] },
+  { id: 'monitoring', category: 'monitoring',
+    text: "Do you periodically reverse-image-search your own bestselling photos to check whether copycats are using them?",
+    options: [['yes','Yes'],['no','No, never']] },
+  { id: 'independent_presence', category: 'presence',
+    text: "Do you have an online presence independent of Etsy — your own website, Instagram, or similar — that could help prove your identity if Etsy ever removed your listings?",
+    options: [['yes','Yes'],['no',"No, Etsy is my only presence"]] },
+  { id: 'copyright_documentation', category: 'copyright',
+    text: "Do you have any dated documentation of your designs — even informal, like emailed or mailed copies to yourself, not necessarily formal registration?",
+    options: [['yes','Yes'],['no','No']] },
+  { id: 'evidence_gathered', category: 'evidence',
+    text: "Have you already screenshotted the infringing listing and filed a report with the platform hosting it (AliExpress/Temu), separately from your Etsy appeal?",
+    options: [['yes','Yes, both'],['no',"Not yet"]],
+    showIf: a => a.situation === 'emergency' },
+];
+
+const CATEGORY_INFO = {
+  proof: { name: 'Proof of original creation', text: {
+    high: "This is the single most persuasive piece of evidence in any appeal. Sellers who've successfully overturned a wrongful flag consistently point to one thing: original work-in-progress photos — materials, half-finished pieces, tools in use — taken before the item was ever listed, ideally with visible timestamps.",
+    low: "You already have original, dated proof of creation, which is exactly what carries the most weight if you ever need to appeal a wrongful flag." }},
+  watermark: { name: 'Process photo watermarking', text: {
+    medium: "Unwatermarked process photos shared publicly are easy for scrapers to lift and easy for you to lose track of. A small, consistent watermark on behind-the-scenes shots costs nothing and gives you a visual claim to the image even if it ends up somewhere you never intended.",
+    low: "You're already watermarking process photos, which makes your ownership easier to demonstrate at a glance." }},
+  monitoring: { name: 'Copycat monitoring', text: {
+    medium: "Sellers who catch a stolen-photo listing early — before Etsy's bot finds it independently — are in a much stronger position: they can report the thief and gather evidence on their own timeline, not in a panic after a bestseller just vanished. A reverse image search on your top photos every so often is the whole routine.",
+    low: "You're already checking periodically, which means you're more likely to catch a copycat before it turns into a surprise deactivation." }},
+  presence: { name: 'Independent online presence', text: {
+    high: "Sellers who exist only on Etsy have described a painful catch: once a listing is removed, they lose the very page that proved the photos were theirs first. An independent website, portfolio, or social account with dated posts gives you a claim to your own work that doesn't disappear if Etsy pulls a listing.",
+    low: "You already have a presence outside Etsy, which protects you from losing your only proof of ownership if a listing is ever removed." }},
+  copyright: { name: 'Dated documentation', text: {
+    medium: "Even informal dated records — a sent email to yourself with photos attached, a cloud file with an untampered creation date — add another layer of evidence. It doesn't need to be a formal registration to help; it needs to establish a date.",
+    low: "You already have some form of dated documentation, which adds another layer of evidence beyond your photos alone." }},
+  evidence: { name: 'Evidence already gathered', text: {
+    high: "An Etsy appeal is stronger alongside a separate report filed directly with AliExpress or Temu — it shows Etsy you're actively pursuing the actual thief, not just disputing the flag. Use the templates on the next unlock to do both in parallel rather than waiting on Etsy alone.",
+    low: "You've already started building your case on two fronts, which puts you ahead of sellers who only appeal to Etsy and wait.",
+    na: "This applies once a listing has actually been flagged. It doesn't affect your shop right now." }},
+};
+
+const CATEGORY_ORDER = ['proof','presence','monitoring','watermark','copyright','evidence'];
+
+let answers = {};
+let currentQId = QUESTIONS[0].id;
+
+function visibleQuestions() {
+  return QUESTIONS.filter(q => !q.showIf || q.showIf(answers));
+}
+
+function showView(name) {
+  ['hero','quiz','results'].forEach(v => {
+    document.getElementById('view-' + v).classList.toggle('hidden', v !== name);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderQuestion() {
+  const qs = visibleQuestions();
+  let idx = qs.findIndex(q => q.id === currentQId);
+  if (idx === -1) idx = 0;
+  const q = qs[idx];
+  currentQId = q.id;
+
+  document.getElementById('quiz-step').textContent = `Question ${idx + 1} of ${qs.length}`;
+  document.getElementById('progress-fill').style.width = `${(idx / qs.length) * 100}%`;
+  document.getElementById('quiz-question').textContent = q.text;
+
+  const optionsEl = document.getElementById('quiz-options');
+  optionsEl.innerHTML = '';
+  q.options.forEach(([val, label]) => {
+    const b = document.createElement('button');
+    b.className = 'option-btn';
+    b.textContent = label;
+    b.addEventListener('click', () => selectAnswer(q.id, val));
+    optionsEl.appendChild(b);
+  });
+
+  document.getElementById('back-btn').classList.toggle('hidden', idx === 0);
+}
+
+function selectAnswer(id, val) {
+  answers[id] = val;
+  const qs = visibleQuestions();
+  const idx = qs.findIndex(q => q.id === id);
+  if (idx < qs.length - 1) {
+    currentQId = qs[idx + 1].id;
+    renderQuestion();
+  } else {
+    finishQuiz();
+  }
+}
+
+document.getElementById('back-btn').addEventListener('click', () => {
+  const qs = visibleQuestions();
+  const idx = qs.findIndex(q => q.id === currentQId);
+  if (idx > 0) {
+    currentQId = qs[idx - 1].id;
+    renderQuestion();
+  }
+});
+
+function finishQuiz() {
+  localStorage.setItem('proofkit_answers', JSON.stringify(answers));
+  showView('results');
+  const { score, cats } = scoreAnswers(answers);
+  renderResults(score, cats);
+}
+
+function scoreAnswers(a) {
+  const cats = {};
+
+  cats.proof = a.original_proof === 'no' ? { tier: 'high', deduction: 25 } : { tier: 'low', deduction: 0 };
+  cats.presence = a.independent_presence === 'no' ? { tier: 'high', deduction: 15 } : { tier: 'low', deduction: 0 };
+  cats.monitoring = a.monitoring === 'no' ? { tier: 'medium', deduction: 18 } : { tier: 'low', deduction: 0 };
+  cats.watermark = a.watermarking === 'no' ? { tier: 'medium', deduction: 15 } : { tier: 'low', deduction: 0 };
+  cats.copyright = a.copyright_documentation === 'no' ? { tier: 'medium', deduction: 15 } : { tier: 'low', deduction: 0 };
+
+  if (a.situation !== 'emergency') cats.evidence = { tier: 'na', deduction: 0 };
+  else if (a.evidence_gathered === 'yes') cats.evidence = { tier: 'low', deduction: 0 };
+  else cats.evidence = { tier: 'high', deduction: 12 };
+
+  const totalDeduction = Object.values(cats).reduce((s, c) => s + c.deduction, 0);
+  const score = Math.max(0, 100 - totalDeduction);
+  return { cats, score };
+}
+
+function renderResults(score, cats) {
+  const scoreTag = document.getElementById('score-tag');
+  document.getElementById('score-number').textContent = score;
+  const band = score >= 85 ? 'good' : score >= 60 ? 'mid' : 'high';
+  document.getElementById('score-band').textContent =
+    band === 'good' ? 'Well protected' : band === 'mid' ? 'A few gaps to close' : 'Vulnerable right now';
+  scoreTag.className = 'score-tag' + (band === 'mid' ? ' band-mid' : band === 'high' ? ' band-high' : '');
+  document.getElementById('emergency-box').classList.toggle('hidden', answers.situation !== 'emergency');
+
+  const unlocked = localStorage.getItem('proofkit_unlocked') === 'true';
+  const reportList = document.getElementById('report-list');
+  reportList.innerHTML = '';
+
+  CATEGORY_ORDER.forEach((key, idx) => {
+    const cat = cats[key];
+    const info = CATEGORY_INFO[key];
+    const tier = cat.tier;
+    const badgeText = tier === 'na' ? 'Not applicable' : tier === 'low' ? 'Good' : tier === 'medium' ? 'Needs attention' : 'High risk';
+    const isFree = idx === 0; // proof of original creation is always shown in full, free
+
+    const row = document.createElement('div');
+    row.className = 'report-row tier-' + tier;
+
+    if (isFree || unlocked) {
+      row.innerHTML = `
+        <div class="report-row-head">
+          <span class="badge badge-${tier}">${badgeText}</span>
+          <h4>${info.name}</h4>
+        </div>
+        <p>${info.text[tier] || info.text.low}</p>`;
+    } else {
+      row.innerHTML = `
+        <div class="report-row-head">
+          <span class="badge badge-${tier}">${badgeText}</span>
+          <h4>${info.name}</h4>
+          <span class="lock">🔒</span>
+        </div>
+        <p class="locked-line">Unlock the full check to see exactly what this means and how to fix it.</p>`;
+    }
+    reportList.appendChild(row);
+  });
+
+  document.getElementById('unlock-card').classList.toggle('hidden', unlocked);
+  document.getElementById('templates-section').classList.toggle('hidden', !unlocked);
+}
+
+document.getElementById('unlock-btn').addEventListener('click', async () => {
+  const input = document.getElementById('license-input');
+  const msg = document.getElementById('license-msg');
+  const btn = document.getElementById('unlock-btn');
+  const key = input.value.trim();
+  if (!key) { msg.className = 'license-msg'; msg.textContent = 'Enter the license key from your purchase email.'; return; }
+
+  if (key === PAYHIP_PRODUCT_SECRET_KEY || key.toLowerCase().startsWith('prod_sk_')) {
+    msg.className = 'license-msg';
+    msg.textContent = "That's the seller's product secret key, not a purchase license key. Check your Payhip receipt or confirmation email for a different code.";
+    return;
+  }
+
+  msg.className = 'license-msg';
+  msg.textContent = 'Checking…';
+  btn.disabled = true;
+  try {
+    const res = await fetch(`https://payhip.com/api/v2/license/verify?license_key=${encodeURIComponent(key)}`, {
+      headers: { 'product-secret-key': PAYHIP_PRODUCT_SECRET_KEY }
+    });
+    let data = null;
+    try { data = await res.json(); } catch (parseErr) { data = null; }
+    const enabled = !!(data && ((data.data && data.data.enabled === true) || data.enabled === true));
+    if (res.ok && enabled) {
+      localStorage.setItem('proofkit_unlocked', 'true');
+      msg.className = 'license-msg ok';
+      msg.textContent = 'Unlocked. Scroll down for your full report.';
+      const stored = JSON.parse(localStorage.getItem('proofkit_answers') || '{}');
+      const { score, cats } = scoreAnswers(stored);
+      renderResults(score, cats);
+    } else {
+      console.error('License check response:', res.status, data);
+      msg.textContent = `That key didn't verify (status ${res.status}). Double-check it against your purchase email, with no extra spaces.`;
+    }
+  } catch (err) {
+    console.error('License check network error:', err);
+    msg.textContent = "Couldn't reach the verification service — this browser may be blocking the request. Check your connection and try again.";
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = document.getElementById(btn.dataset.target);
+    navigator.clipboard.writeText(target.textContent).then(() => {
+      const original = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = original; }, 1500);
+    });
+  });
+});
+
+document.getElementById('start-btn').addEventListener('click', () => {
+  currentQId = QUESTIONS[0].id;
+  showView('quiz');
+  renderQuestion();
+});
+
+document.getElementById('retake-btn').addEventListener('click', () => {
+  answers = {};
+  localStorage.removeItem('proofkit_answers');
+  currentQId = QUESTIONS[0].id;
+  showView('quiz');
+  renderQuestion();
+});
+
+function init() {
+  document.getElementById('payhip-link').href = PAYHIP_PRODUCT_URL;
+  document.getElementById('price-display').textContent = PRICE_DISPLAY;
+
+  const savedAnswers = localStorage.getItem('proofkit_answers');
+  const unlocked = localStorage.getItem('proofkit_unlocked') === 'true';
+  if (savedAnswers) {
+    answers = JSON.parse(savedAnswers);
+    if (unlocked) {
+      showView('results');
+      const { score, cats } = scoreAnswers(answers);
+      renderResults(score, cats);
+    }
+  }
+}
+init();
+</script>
+</body>
+</html>
